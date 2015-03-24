@@ -52,16 +52,15 @@ func main() {
 
 			db := sqlx.MustOpen(viper.GetString("driver"), viper.GetString("dsn"))
 
-			if viper.GetString("driver") == "sqlite3" {
-				schema := `CREATE TABLE IF NOT EXISTS message (
-					uid varchar(36) PRIMARY KEY NOT NULL,
-					sender varchar(64) NOT NULL,
-					receiver varchar(64) NOT NULL,
-					text text NOT NULL,
-					video varchar(255) NOT NULL
-				);`
-				db.MustExec(schema)
-			}
+			schema := `CREATE TABLE IF NOT EXISTS message (
+				uid varchar(36) PRIMARY KEY NOT NULL,
+				sender varchar(64) NOT NULL,
+				receiver varchar(64) NOT NULL,
+				text text NOT NULL,
+				video varchar(255) NOT NULL
+			);`
+			db.MustExec(schema)
+
 
 			app := newApplication(db)
 
