@@ -379,7 +379,7 @@ var Copyright = React.createClass({
     render: function() {
         return (
             <div className="b-copyright">
-                <a className="b-copyright__text">FZambia, 2015</a>
+                <a href="https://github.com/FZambia" className="b-copyright__link" target="_blank">FZambia, 2015</a>
             </div>
         )
     }

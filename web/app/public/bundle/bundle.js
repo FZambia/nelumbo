@@ -395,7 +395,7 @@ var Copyright = React.createClass({displayName: "Copyright",
     render: function() {
         return (
             React.createElement("div", {className: "b-copyright"}, 
-                React.createElement("a", {className: "b-copyright__text"}, "FZambia, 2015")
+                React.createElement("a", {href: "https://github.com/FZambia", className: "b-copyright__link", target: "_blank"}, "FZambia, 2015")
             )
         )
     }
