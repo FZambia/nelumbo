@@ -2,9 +2,8 @@ package main
 
 import (
 	"database/sql"
-	"time"
-
 	"github.com/jmoiron/sqlx"
+	"time"
 )
 
 type Message struct {
@@ -28,12 +27,21 @@ func newApplication(db *sqlx.DB) *application {
 }
 
 func (app *application) getMessageByUid(uid string) (*Message, error) {
-	var m Message
-	err := app.db.QueryRowx("SELECT uid, sender, receiver, text, video FROM message WHERE uid=? LIMIT 1", uid).StructScan(&m)
-	if err == sql.ErrNoRows {
-		return nil, nil
+	rows, err := app.db.NamedQuery("SELECT uid, sender, receiver, text, video FROM message WHERE uid=:uid LIMIT 1", map[string]interface{}{"uid": uid})
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+		return nil, err
 	}
-	return &m, err
+	var m Message
+	for rows.Next() {
+		err = rows.StructScan(&m)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return &m, nil
 }
 
 func (app *application) createMessage(uid, sender, receiver, text, video string) (*Message, error) {
