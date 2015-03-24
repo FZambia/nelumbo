@@ -39,14 +39,16 @@ func main() {
 			viper.SetConfigFile(configFile)
 			viper.ReadInConfig()
 
-			viper.SetEnvPrefix("nelumbo")
-			viper.BindEnv("port", "address")
-
 			viper.BindPFlag("port", cmd.Flags().Lookup("port"))
 			viper.BindPFlag("address", cmd.Flags().Lookup("address"))
 			viper.BindPFlag("driver", cmd.Flags().Lookup("driver"))
 			viper.BindPFlag("dsn", cmd.Flags().Lookup("dsn"))
 			viper.BindPFlag("web", cmd.Flags().Lookup("web"))
+
+			viper.SetEnvPrefix("nelumbo")
+			viper.BindEnv("port")
+			viper.BindEnv("address")
+			viper.BindEnv("dsn")
 
 			fmt.Printf("%v\n", viper.AllSettings())
 
