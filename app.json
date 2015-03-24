@@ -7,6 +7,5 @@
   "addons": ["heroku-postgresql:hobby-dev"],
   "env": {
     "BUILDPACK_URL": "https://github.com/kr/heroku-buildpack-go"
-  },
-  "buildpack_url": "https://github.com/kr/heroku-buildpack-go"
+  }
 }
