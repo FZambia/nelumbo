@@ -5,5 +5,8 @@
   "logo": "https://raw.githubusercontent.com/FZambia/nelumbo/master/web/app/public/images/flower.png",
   "keywords": ["go", "react", "reactjs"],
   "addons": ["heroku-postgresql:hobby-dev"],
+  "env": {
+    "BUILDPACK_URL": "https://github.com/kr/heroku-buildpack-go"
+  }
   "buildpack_url": "https://github.com/kr/heroku-buildpack-go"
 }
