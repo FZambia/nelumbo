@@ -1,10 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
-	"encoding/json"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/nu7hatch/gouuid"
@@ -21,7 +21,15 @@ func (app *application) createHandler(w http.ResponseWriter, r *http.Request, ps
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
-	message, err := app.createMessage(uid.String(), r.FormValue("sender"), r.FormValue("receiver"), r.FormValue("text"), r.FormValue("video"))
+	sender := r.FormValue("sender")
+	receiver := r.FormValue("receiver")
+	text := r.FormValue("text")
+	video := r.FormValue("video")
+	if len(sender) > 64 || len(receiver) > 64 || len(text) > 2000 || len(video) > 255 {
+		http.Error(w, "Bad Request", http.StatusBadRequest)
+		return
+	}
+	message, err := app.createMessage(uid.String(), sender, receiver, text, video)
 	if err != nil {
 		log.Println(err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)

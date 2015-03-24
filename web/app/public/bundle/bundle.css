@@ -544,6 +544,16 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
+.b-form__submit_error,
+.b-form__submit_error.b-form__submit:hover {
+  background: none repeat scroll 0 0 #62000b;
+  color: #fff;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
+}
+
 .b-video-preview {
   display: inline-block;
   position: relative;

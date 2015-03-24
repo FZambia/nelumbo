@@ -173,21 +173,31 @@ var Form = React.createClass({displayName: "Form",
             text: "",
             video: videos[videoIndex].video,
             size: videos[videoIndex].size,
-            duration: videos[videoIndex].duration
+            duration: videos[videoIndex].duration,
+            isDisabled: false
         }
     },
     handleSubmit: function(e) {
         e.preventDefault();
+        var btn = $(this.refs.submit.getDOMNode());
         var data = {
             "sender": this.state.sender,
             "receiver": this.state.receiver,
             "text": this.state.text,
             "video": this.state.video
         };
+        this.setState({isDisabled: true});
         $.post(apiURL, data, function(data) {
             messages[data.uid] = data;
             this.transitionTo("message", {messageId: data.uid}, {});
-        }.bind(this), "json");
+        }.bind(this), "json").error(function(){
+            btn.addClass("b-form__submit_error").delay(1000).queue(function(next){
+                $(this).removeClass("b-form__submit_error");
+                next();
+            });
+        }.bind(this)).always(function(){
+            this.setState({isDisabled: false});
+        }.bind(this));
     },
     handleSenderChange: function(e) {
         this.setState({"sender": e.target.value})
@@ -292,10 +302,10 @@ var Form = React.createClass({displayName: "Form",
             React.createElement("div", {className: "b-form"}, 
                 React.createElement("form", {id: "form", ref: "form", onSubmit: this.handleSubmit}, 
                     React.createElement("div", {className: "b-form__row"}, 
-                        React.createElement("input", {type: "text", autoComplete: "off", ref: "sender", name: "sender", className: "b-form__control", placeholder: "introduce yourself", onChange: this.handleSenderChange, value: this.state.sender})
+                        React.createElement("input", {type: "text", maxLength: "64", autoComplete: "off", ref: "sender", name: "sender", className: "b-form__control", placeholder: "introduce yourself", onChange: this.handleSenderChange, value: this.state.sender})
                     ), 
                     React.createElement("div", {className: "b-form__row"}, 
-                        React.createElement("input", {type: "text", autoComplete: "off", ref: "receiver", name: "receiver", className: "b-form__control", placeholder: "introduce receiver", onChange: this.handleReceiverChange, value: this.state.receiver})
+                        React.createElement("input", {type: "text", maxLength: "64", autoComplete: "off", ref: "receiver", name: "receiver", className: "b-form__control", placeholder: "introduce receiver", onChange: this.handleReceiverChange, value: this.state.receiver})
                     ), 
                     React.createElement("div", {className: "b-form__row b-form__row_preview"}, 
                         React.createElement("div", {ref: "preview", className: "b-video-preview", onClick: this.handlePreviewClick}), 
@@ -305,10 +315,10 @@ var Form = React.createClass({displayName: "Form",
                         React.createElement("p", {onClick: this.handlePreviewClick, className: "b-tooltip b-tooltip__left"}, "Click", React.createElement("br", null), "to", React.createElement("br", null), "change")
                     ), 
                     React.createElement("div", {className: "b-form__row b-form__row_text"}, 
-                        React.createElement("textarea", {spellCheck: "false", name: "text", className: "b-form__control", placeholder: "write your message", onChange: this.handleTextChange, value: this.state.text})
+                        React.createElement("textarea", {maxLength: "2000", spellCheck: "false", name: "text", className: "b-form__control", placeholder: "write your message", onChange: this.handleTextChange, value: this.state.text})
                     ), 
                     React.createElement("div", {className: "b-form__row_submit"}, 
-                        React.createElement("button", {type: "submit", className: "b-form__submit"}, "Submit")
+                        React.createElement("button", {type: "submit", ref: "submit", disabled: this.state.isDisabled, className: "b-form__submit"}, "Submit")
                     )
                 )
             )
