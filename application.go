@@ -37,8 +37,14 @@ func (app *application) getMessageByUid(uid string) (*Message, error) {
 }
 
 func (app *application) createMessage(uid, sender, receiver, text, video string) (*Message, error) {
-	query := `INSERT INTO message (uid, sender, receiver, text, video) VALUES (?, ?, ?, ?, ?)`
-	_, err := app.db.Exec(query, uid, sender, receiver, text, video)
+	query := `INSERT INTO message (uid, sender, receiver, text, video) VALUES (:uid, :sender, :receiver, :text, :video)`
+	_, err := app.db.NamedExec(query, map[string]interface{}{
+		"uid":      uid,
+		"sender":   sender,
+		"receiver": receiver,
+		"text":     text,
+		"video":    video,
+	})
 	if err != nil {
 		return nil, err
 	}

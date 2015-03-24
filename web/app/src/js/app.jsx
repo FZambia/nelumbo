@@ -276,10 +276,10 @@ var Form = React.createClass({
             <div className="b-form">
                 <form id="form" ref="form" onSubmit={this.handleSubmit}>
                     <div className="b-form__row">
-                        <input type="text" ref="sender" name="sender" className="b-form__control" placeholder="introduce yourself" onChange={this.handleSenderChange} value={this.state.sender} />
+                        <input type="text" autoComplete="off" ref="sender" name="sender" className="b-form__control" placeholder="introduce yourself" onChange={this.handleSenderChange} value={this.state.sender} />
                     </div>
                     <div className="b-form__row">
-                        <input type="text" ref="receiver" name="receiver" className="b-form__control" placeholder="introduce receiver" onChange={this.handleReceiverChange} value={this.state.receiver} />
+                        <input type="text" autoComplete="off" ref="receiver" name="receiver" className="b-form__control" placeholder="introduce receiver" onChange={this.handleReceiverChange} value={this.state.receiver} />
                     </div>
                     <div className="b-form__row b-form__row_preview">
                         <div ref="preview" className="b-video-preview" onClick={this.handlePreviewClick}></div>
