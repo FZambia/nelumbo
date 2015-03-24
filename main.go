@@ -7,6 +7,7 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	"github.com/julienschmidt/httprouter"
+	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -48,6 +49,7 @@ func main() {
 			viper.SetEnvPrefix("nelumbo")
 			viper.BindEnv("port")
 			viper.BindEnv("address")
+			viper.BindEnv("driver")
 			viper.BindEnv("dsn")
 
 			fmt.Printf("%v\n", viper.AllSettings())
@@ -62,7 +64,6 @@ func main() {
 				video varchar(255) NOT NULL
 			);`
 			db.MustExec(schema)
-
 
 			app := newApplication(db)
 
