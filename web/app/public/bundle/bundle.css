@@ -182,10 +182,45 @@ body {
 .b-video {
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
+  overflow: hidden;
   z-index: -1;
+}
+
+.b-video > video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 1. No object-fit support: */
+
+@media (min-aspect-ratio: 16/9) {
+  .b-video > video {
+    height: 300%;
+    top: -100%;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .b-video > video {
+    width: 300%;
+    left: -100%;
+  }
+}
+
+@supports (object-fit: cover) {
+  .b-video > video {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .b-overlay {
@@ -485,11 +520,11 @@ body {
 
 .b-form__submit {
   font-size: 1em;
-  border: 3px solid #232529;
+  border: 3px solid #343030;
   border-radius: 40px;
-  color: rgba(0,0,0,0.4);
+  color: #ababab;
   padding: 0.2em 0.9em;
-  background: none repeat scroll 0 0 rgba(0,0,0,0);
+  background: #3b3f45;
   cursor: pointer;
   font-family: "Courier New";
   outline: none;
@@ -502,6 +537,7 @@ body {
 .b-form__submit:hover {
   background: none repeat scroll 0 0 #232529;
   color: #fff;
+  border-color: #ababab;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease;
