@@ -1,0 +1,11 @@
+{
+  "name": "Nelumbo",
+  "description": "Send beautiful messages with video background to your friends",
+  "repository": "https://github.com/FZambia/nelumbo.git",
+  "logo": "https://raw.githubusercontent.com/FZambia/nelumbo/master/web/app/public/images/flower.png",
+  "keywords": ["go", "react", "reactjs"],
+  "env": {
+    "BUILDPACK_URL": "https://github.com/kr/heroku-buildpack-go"
+  },
+  "addons": ["heroku-postgresql:hobby-dev"]
+}

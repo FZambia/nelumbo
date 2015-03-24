@@ -5,7 +5,13 @@ Small weekend project to send beautiful messages with video background to your f
 
 Built on top of Go language on server side and ReactJS on web browser side.
 
-To run:
+See Nelumbo [demo](https://nelumbo.herokuapp.com) on Heroku.
+
+You can deploy your own installation on Heroku in one click:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/FZambia/nelumbo)
+
+To run locally:
 
 ```
 git clone https://github.com/FZambia/nelumbo.git nelumbo
