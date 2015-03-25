@@ -2,17 +2,12 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/nu7hatch/gouuid"
 )
-
-func (app *application) homeHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	fmt.Fprint(w, "I work, baby!")
-}
 
 func (app *application) createHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	uid, err := uuid.NewV4()
