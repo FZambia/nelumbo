@@ -22,7 +22,7 @@ go build
 
 Then visit [http://localhost:8000](http://localhost:8000)
 
-Note, that this application not optimized for mobile platforms yet!
+Note, that this application not optimized for mobile browsers!
 
 By default in-memory sqlite3 database will be used, but it's possible
 to configure database driver and set DSN as this project uses [sqlx](https://github.com/jmoiron/sqlx)
