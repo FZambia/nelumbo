@@ -6,6 +6,6 @@
   "keywords": ["go", "react", "reactjs"],
   "addons": ["heroku-postgresql:hobby-dev"],
   "env": {
-    "BUILDPACK_URL": "https://github.com/kr/heroku-buildpack-go"
+    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-go"
   }
 }
